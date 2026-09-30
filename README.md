@@ -1,71 +1,90 @@
-# SecureBank Automation
 
-A scalable UI & Network Automation framework for the QA Playground Bank web application, built with **Playwright**, **TypeScript**, and the **Page Object Model (POM)**.
 
-## Key Features & Coverage
-- Login and role-based authentication 
-- Dashboard and account balance validation
-- Transfer and send-money flows
-- Transaction history, search, and filtering
-- Network interception and API mocking (HTTP 500 error handling)
-- Navigation and UI behavior
-- Visual regression coverage
+# 🏦 SecureBank Automation
 
-## Tech Stack
-- **Framework:** Playwright Test
-- **Language:** TypeScript
-- **Design Pattern:** Page Object Model (POM) & Custom Fixtures
-- **Reporting:** Allure Report + Native HTML Reporter
-- **Code Quality:** ESLint + Prettier
+A scalable UI automation framework for the [QA Playground Bank](https://qaplayground.com/bank/login) web application, built with **Playwright**, **TypeScript**, and the **Page Object Model (POM)** pattern.
 
-## Prerequisites
-- **Node.js:** 18+
-- **npm:** 9+
+---
 
-## Setup
+## 📌 Key Features & Coverage
 
-```bash
-# 1. Install dependencies
-npm install
+* **Authentication & Security:** Login and role-based authentication flows.
+* **Dashboard & Accounts:** Balance validation and dashboard widgets.
+* **Transactions:** Transfer, send-money flows, search, and filtering.
+* **Network Interception & Mocking:** API error handling (e.g., HTTP 500 scenarios) and network stubbing.
+* **UI & Visual Testing:** Cross-page navigation checks and visual regression coverage.
 
-# 2. Install Playwright browser binaries
-npx playwright install
+---
 
-Running Tests
+## 🛠 Tech Stack
 
-# Run full test suite
-npm test
+* **Framework:** Playwright Test
+* **Language:** TypeScript
+* **Design Pattern:** Page Object Model (POM) & Custom Fixtures
+* **Reporting:** Allure Report + Native Playwright HTML Reporter
+* **Code Quality:** ESLint + Prettier
 
-# Run smoke tests
-npm run test:smoke
+---
 
-# Run a single spec file
-npx playwright test tests/transactions.spec.ts
+## ⚙️ Prerequisites
 
-# Run tests in headed browser mode
-npx playwright test --headed
+* **Node.js:** 18.x or higher
+* **npm:** 9.x or higher
 
-Project Structure
+---
 
+## 🚀 Setup & Installation
+
+1. Install dependencies:
+`npm install`
+2. Install Playwright browser binaries:
+`npx playwright install`
+
+---
+
+## 🧪 Running Tests
+
+* **Run full test suite:**
+`npm test`
+* **Run smoke tests:**
+`npm run test:smoke`
+* **Run a single spec file:**
+`npx playwright test tests/transactions.spec.ts`
+* **Run tests in headed browser mode:**
+`npx playwright test --headed`
+
+---
+
+## 🔐 Authentication & Session Management
+
+The test suite uses Playwright Setup Projects to log in once during initial setup and save the storage state under `.auth/user.json`. Subsequent test specs reuse this state to bypass repetitive UI login steps.
+
+---
+
+## 📁 Project Structure
+
+```
 SecureBank/
-├── data/                 # Error message constants & regex patterns
-├── fixtures/             # Custom Playwright test fixtures
-├── pages/                # Page Object Model (POM) classes
-├── tests/                # Test spec files
-├── utils/                # Helper utilities (mockUtils.ts, network interceptors)
-├── .auth/                # Saved browser authentication state
-├── allure-results/       # Raw Allure test result artifacts
-├── playwright-report/    # Playwright HTML report output
-├── playwright.config.ts  # Global Playwright configuration
+├── .auth/                 # Saved browser authentication state
+├── data/                  # Test data
+├── fixtures/              # Custom Playwright test fixtures
+├── pages/                 # Page Object Model (POM) classes
+├── tests/                 # Test spec files
+├── utils/                 # Helper utilities (mockUtils.ts, network interceptors)
+├── allure-results/        # Raw Allure test result artifacts
+├── playwright-report/     # Playwright HTML report output
+├── playwright.config.ts   # Global Playwright configuration
 ├── package.json
 ├── tsconfig.json
 └── README.md
 
-Authentication & Session Management
-The suite uses Playwright setup project capabilities to log in once during initial setup and save the storage state under .auth/user.json. Subsequent test specs reuse this state to bypass repetitive UI login steps.
+```
 
-Reporting & Scripts
-npm test — full test suite
-npm run test:smoke — smoke tests only
-npm run lint — ESLint code quality check
-npm run allure:generate — generate Allure report
+---
+
+## 📊 Available Scripts
+
+* `npm test` — Full test suite
+* `npm run test:smoke` — Smoke tests only
+* `npm run lint` — ESLint code quality check
+* `npm run allure:generate` — Generate Allure report
