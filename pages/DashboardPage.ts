@@ -28,6 +28,7 @@ export class DashboardPage {
    */
   async navigateTo(): Promise<void> {
     await this.page.goto('/bank/dashboard');
+    await expect(this.welcomeHeading).toBeVisible();
   }
 
   /**
