@@ -128,4 +128,6 @@ SecureBank/
 - `npm run test:smoke` — Smoke tests only
 - `npm run lint` — ESLint code quality check
 - `npm run format` - Format with Prettier
-- `npm run allure:generate` - Generate and open Allure report
+- `npm run allure:serve` — Generate and open Allure report
+- `npm run allure:generate` — Generate a standalone HTML report
+- `npm run allure:open` — Open the generated HTML report
