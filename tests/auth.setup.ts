@@ -2,8 +2,10 @@ import { test as setup, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { roles } from '../data/users';
 import { DashboardPage } from '../pages/DashboardPage';
+import { commonErrors } from '../data/error-messages';
 import path from 'path';
 import fs from 'fs';
+
 
 const authDir = 'playwright/.auth';
 
@@ -34,7 +36,7 @@ setup('authenticate as frozen user', async ({ page }) => {
   await loginPage.navigateTo();
   await loginPage.enterUserNameAndPassword(roles.frozen.username, roles.frozen.password);
   
-  await expect(dashboardPage.frozenAlertBanner).toBeVisible();
+  await dashboardPage.frozenAccountBanner.verifyIsDisplayed(commonErrors.frozenAccount);
 
   await page.context().storageState({ path: path.join(authDir, 'frozen.json') });
 });

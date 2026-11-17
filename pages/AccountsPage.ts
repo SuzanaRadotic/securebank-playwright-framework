@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { FrozenAccountBanner } from './components/FrozenAccountBanner';
 
 export class AccountsPage {
   readonly page: Page;
@@ -10,8 +11,8 @@ export class AccountsPage {
 
   // Status indicators and banners
   readonly overdraftWarningIndicator: Locator;
-  readonly frozenAccountBanner: Locator;
   readonly emptyStateMessage: Locator;
+  readonly frozenAccountBanner: FrozenAccountBanner;
 
   // Account dialog locators
   readonly addAccountButton: Locator;
@@ -32,7 +33,7 @@ export class AccountsPage {
 
     // Status indicators and banners
     this.overdraftWarningIndicator = this.accountsTable.getByTestId('account-row-overdrawn');
-    this.frozenAccountBanner = this.page.getByTestId('frozen-account-banner');
+    this.frozenAccountBanner = new FrozenAccountBanner(page);
     this.emptyStateMessage = page.getByText('No accounts found.');
     
 
@@ -207,34 +208,27 @@ export class AccountsPage {
     expect(toEndBalance).toBeCloseTo(toStartBalance + transferAmount, 2);
   }
 
-    /**
-   * Asserts that the 'Account Frozen' banner is visible on the Accounts page
-   */
-  async verifyFrozenBannerIsDisplayed(expectedText?: string | RegExp): Promise<void> {
+  /**
+  * Asserts that the 'Account Frozen' banner is visible on the Accounts page
+  */
+  async verifyFrozenBannerIsDisplayed(expectedText: string): Promise<void> {
     await expect(this.page).toHaveURL('/bank/accounts');
-
-    await expect(this.frozenAccountBanner).toBeVisible();
-
-    if (expectedText) {
-      await expect(this.frozenAccountBanner).toContainText(expectedText);
-    } else {
-      await expect(this.frozenAccountBanner).toContainText(/account frozen/i);
-    }
+    await this.frozenAccountBanner.verifyIsDisplayed(expectedText);
   }
 
   async verifyEmptyStateMessageIsDisplayed(expectedMessage: string | RegExp): Promise<void> {
-  // 1. Verify 0 rows are displayed in the table
-  await expect(this.accountRows).toHaveCount(0);
+    // 1. Verify 0 rows are displayed in the table
+    await expect(this.accountRows).toHaveCount(0);
 
-  // 2. Verify empty state element is visible and displays the expected text
-  await expect(this.emptyStateMessage).toBeVisible();
-  await expect(this.emptyStateMessage).toHaveText(expectedMessage);
-}
+    // 2. Verify empty state element is visible and displays the expected text
+    await expect(this.emptyStateMessage).toBeVisible();
+    await expect(this.emptyStateMessage).toHaveText(expectedMessage);
+  }
 
-    /**
-   * Captures And New Account dialog visual baseline
-   */
-    async verifyAddNewAccountFormVisuals() {
+  /**
+  * Captures And New Account dialog visual baseline
+  */
+  async verifyAddNewAccountFormVisuals() {
     await expect(this.addAccountDialog).toHaveScreenshot('add-new-account-dialog.png', { maxDiffPixelRatio: 0.015 });
   }
 }

@@ -1,13 +1,15 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { FrozenAccountBanner } from './components/FrozenAccountBanner';
 
 export class DashboardPage {
   readonly page: Page;
+  readonly frozenAccountBanner: FrozenAccountBanner;
   readonly welcomeHeading: Locator;
   readonly totalBalanceDisplay: Locator;
   readonly recentTransactionsWidget: Locator;
   readonly recentTransactionRows: Locator;
   readonly recentTransactionDates: Locator;
-  readonly frozenAlertBanner: Locator;
+ 
 
   constructor(page: Page) {
     this.page = page;
@@ -20,7 +22,7 @@ export class DashboardPage {
     this.recentTransactionDates = this.page.getByTestId('recent-txn-date');
 
     // Auxiliary dashboard cards and alerts
-    this.frozenAlertBanner = this.page.getByTestId('frozen-account-banner');
+    this.frozenAccountBanner = new FrozenAccountBanner(page);
   }
 
   /**
@@ -88,9 +90,8 @@ export class DashboardPage {
   /**
    * Verifies account frozen banner text
    */
-  async verifyFrozenBannerIsDisplayed(expectedText: string | RegExp): Promise<void> {
+  async verifyFrozenBannerIsDisplayed(expectedText: string): Promise<void> {
     await expect(this.page).toHaveURL('/bank/dashboard');
-    await expect(this.frozenAlertBanner).toBeVisible();
-    await expect(this.frozenAlertBanner).toContainText(expectedText);
+    await this.frozenAccountBanner.verifyIsDisplayed(expectedText);
   }
 }

@@ -186,19 +186,25 @@ export class SendMoneyPage {
   }
 
   /**
-   * Asserts routing number validation error inside Add Payee modal
-   */
-  async verifyRoutingNumberErrorIsDisplayed(expectedError: string | RegExp) {
+  * Asserts validation error inside Add Payee modal
+  */
+  private async verifyAddPayeeErrorIsDisplayed(expectedError: string | RegExp): Promise<void> {
     await expect(this.addPayeeErrorMessage).toBeVisible();
     await expect(this.addPayeeErrorMessage).toContainText(expectedError);
   }
 
   /**
-   * Asserts account number validation error inside Add Payee modal
+   * Asserts Routing Number validation error inside Add Payee modal
    */
-  async verifyAccountNumberErrorIsDisplayed(expectedError: string | RegExp) {
-    await expect(this.addPayeeErrorMessage).toBeVisible();
-    await expect(this.addPayeeErrorMessage).toContainText(expectedError);
+  async verifyRoutingNumberErrorIsDisplayed(expectedError: string | RegExp): Promise<void> {
+    await this.verifyAddPayeeErrorIsDisplayed(expectedError);
+  }
+
+  /**
+   * Asserts Account Number validation error inside Add Payee modal
+   */
+  async verifyAccountNumberErrorIsDisplayed(expectedError: string | RegExp): Promise<void> {
+    await this.verifyAddPayeeErrorIsDisplayed(expectedError);
   }
 
   /**
@@ -220,7 +226,7 @@ export class SendMoneyPage {
   /**
    * Asserts 'Sending money is disabled' banner for frozen accounts
    */
-  async verifyFormDisabledBannerIsDisplayed(expectedMessage: string | RegExp): Promise<void> {
+  async verifyFormDisabledBannerIsDisplayed(expectedMessage: string): Promise<void> {
     await expect(this.formDisabledBanner).toBeVisible();
     await expect(this.formDisabledBanner).toContainText(expectedMessage);
   }
