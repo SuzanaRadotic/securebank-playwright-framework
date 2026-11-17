@@ -235,6 +235,6 @@ export class AccountsPage {
    * Captures And New Account dialog visual baseline
    */
     async verifyAddNewAccountFormVisuals() {
-    await expect(this.addAccountDialog).toHaveScreenshot('add-new-account-dialog.png', { maxDiffPixelRatio: 0.02 });
+    await expect(this.addAccountDialog).toHaveScreenshot('add-new-account-dialog.png', { maxDiffPixelRatio: 0.015 });
   }
 }

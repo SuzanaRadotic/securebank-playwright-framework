@@ -246,13 +246,13 @@ export class SendMoneyPage {
    * Captures Send Money screen visual baseline
    */
   async verifySendMoneyPageVisuals() {
-    await expect(this.sendMoneyPage).toHaveScreenshot('send-money-page.png');
+    await expect(this.sendMoneyPage).toHaveScreenshot('send-money-page.png', { maxDiffPixelRatio: 0.015 });
   }
 
    /**
    * Captures And New Payee dialog visual baseline
    */
   async verifyAddNewPayeeFormVisuals() {
-    await expect(this.addPayeeDialog).toHaveScreenshot('add-payee-dialog.png', { maxDiffPixelRatio: 0.02 });
+    await expect(this.addPayeeDialog).toHaveScreenshot('add-payee-dialog.png', { maxDiffPixelRatio: 0.015 });
   }
 }

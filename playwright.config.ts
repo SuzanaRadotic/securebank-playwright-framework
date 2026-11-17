@@ -30,7 +30,7 @@ environmentInfo: {
   ],
   use: {
     baseURL: 'https://qaplayground.com',
-    headless: false,
+    headless: !!process.env.CI,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },

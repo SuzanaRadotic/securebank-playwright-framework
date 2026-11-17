@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "node -e \"fs.rmSync('allure-results', { recursive: true, force: true })\"",
+    "clean": "node -e \"require('fs').rmSync('allure-results', { recursive: true, force: true })\"",
     "test": "npm run clean && playwright test",
     "test:smoke": "playwright test --grep \"@smoke\"",
     "allure:serve": "npx allure serve allure-results",

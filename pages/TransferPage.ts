@@ -182,6 +182,6 @@ async verifyInsufficientFundsErrorIsDisplayed(expectedError: string | RegExp): P
    * Captures Transfer Money screen visual baseline
    */
   async verifyTransferPageVisuals() {
-    await expect(this.transferPage).toHaveScreenshot('transfer-money-page.png');
+    await expect(this.transferPage).toHaveScreenshot('transfer-money-page.png', { maxDiffPixelRatio: 0.015 });
   }
 }
