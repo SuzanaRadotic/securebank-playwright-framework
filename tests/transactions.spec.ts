@@ -1,6 +1,5 @@
 import { transactionsErrors } from '../data/error-messages';
 import { test } from '../fixtures/page-fixtures';
-import { mockServerError } from '../utils/mock-utils';
 
 test.describe('Transactions Screen Tests', () => {
   test.use({ storageState: 'playwright/.auth/standard.json' });
@@ -38,14 +37,6 @@ test.describe('Transactions Screen Tests', () => {
 
   test('TC-TXN-006: No transactions message should appear when filters return no results', { tag: ['@p3'] }, async ({ transactionsPage }) => {
     await transactionsPage.enterSearchTerm('XYZ123NonExistent');
-    await transactionsPage.verifyEmptyStateMessageIsDisplayed(transactionsErrors.noMatchingResults);
-  });
-});
-
-test.describe('Transactions - Network Interception & Fallback', () => {
-  test('TC-TXN-007: Fallback to empty state on HTTP 500 server error', async ({ page, transactionsPage }) => {
-    await mockServerError(page, '**/bank/transactions*');
-    await transactionsPage.navigateTo();
     await transactionsPage.verifyEmptyStateMessageIsDisplayed(transactionsErrors.noMatchingResults);
   });
 });

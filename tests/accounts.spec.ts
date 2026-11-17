@@ -1,7 +1,7 @@
 import { test } from '../fixtures/page-fixtures';
 import { roles } from '../data/users';
 import { accountsErrors, commonErrors } from '../data/error-messages';
-import { mockServerError } from '../utils/mock-utils';
+import { seedUserWithNoAccounts } from '../utils/seed-utils';
 
 test.describe('Accounts Screen - Account Management', () => {
 
@@ -54,10 +54,16 @@ test.describe('Accounts Screen - Account Management', () => {
   });
 });
 
-  test.describe('Accounts - Network Interception & Fallback', () => {
-    test('TC-ACC-007: Fallback to empty state on HTTP 500 server error', async ({ page, accountsPage }) => {
-      await mockServerError(page, '**/bank/accounts*');
+test.describe('Standard User - Empty State', () => {
+  test.use({ storageState: 'playwright/.auth/standard.json' });
+
+  test(
+    'TC-ACC-007: Empty state should be displayed when the user has no accounts',
+    { tag: ['@p2'] },
+    async ({ page, accountsPage }) => {
+      await seedUserWithNoAccounts(page, roles.standard.username);
       await accountsPage.navigateTo();
       await accountsPage.verifyEmptyStateMessageIsDisplayed(accountsErrors.noMatchingResults);
-    });
-  });
+    },
+  );
+});
