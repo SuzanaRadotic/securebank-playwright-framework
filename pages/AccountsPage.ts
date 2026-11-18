@@ -198,6 +198,7 @@ export class AccountsPage {
     toStartBalance: number,
     transferAmount: number,
   ): Promise<void> {
+  await expect(async () => {
     const fromEndBalance = await this.getAccountBalance(fromAccountType);
     const toEndBalance = await this.getAccountBalance(toAccountType);
 
@@ -206,6 +207,7 @@ export class AccountsPage {
 
     // Verify destination account balance increased
     expect(toEndBalance).toBeCloseTo(toStartBalance + transferAmount, 2);
+  }).toPass();
   }
 
   /**

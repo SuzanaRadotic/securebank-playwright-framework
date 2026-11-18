@@ -78,14 +78,17 @@ export class DashboardPage {
   /**
    * Asserts transactions are sorted by date descending
    */
-  async verifyRecentTransactionsSortedByDateDescending(): Promise<void> {
-    const dateTexts = await this.recentTransactionDates.allInnerTexts();
-    const timestamps = dateTexts.map((dateStr) => new Date(dateStr).getTime());
+async verifyRecentTransactionsSortedByDateDescending(): Promise<void> {
+  const dateTexts = await this.recentTransactionDates.allInnerTexts();
+  expect(dateTexts.length).toBeGreaterThan(0);
 
-    for (let i = 0; i < timestamps.length - 1; i++) {
-      expect(timestamps[i]).toBeGreaterThanOrEqual(timestamps[i + 1]);
-    }
+  const timestamps = dateTexts.map((dateStr) => new Date(dateStr).getTime());
+  expect(timestamps.every(Number.isFinite)).toBe(true);
+
+  for (let i = 0; i < timestamps.length - 1; i++) {
+    expect(timestamps[i]).toBeGreaterThanOrEqual(timestamps[i + 1]);
   }
+}
 
   /**
    * Verifies account frozen banner text
