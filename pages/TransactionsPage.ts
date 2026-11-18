@@ -28,7 +28,7 @@ export class TransactionsPage {
   }
 
   async navigateTo() {
-    await this.page.goto('https://qaplayground.com/bank/transactions');
+    await this.page.goto('/bank/transactions');
     await expect(this.transactionsTable).toBeVisible();
   }
 

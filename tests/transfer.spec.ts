@@ -7,7 +7,6 @@ test.describe('Transfer Money - Internal Transfers', { tag: ['@smoke', '@p1'] },
 
   test.beforeEach(async ({ transferPage }) => {
     await transferPage.navigateTo();
-    await transferPage.navigateTo();
   });
 
   test('TC-XFER-001: Internal Transfer form, with From/To dropdowns, should load successfully', async ({ transferPage }) => {

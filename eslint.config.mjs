@@ -4,6 +4,15 @@ import playwrightPlugin from 'eslint-plugin-playwright';
 
 export default [
   {
+  ignores: [
+    'allure-report/**',
+    'allure-results/**',
+    'playwright-report/**',
+    'test-results/**',
+    'eslint-report.json',
+  ],
+},
+  {
     files: ['**/*.ts', '**/*.js'],
     languageOptions: {
       parser: tsParser,
@@ -17,6 +26,7 @@ export default [
       playwright: playwrightPlugin,
     },
     rules: {
+      ...tsPlugin.configs.recommended.rules,
       ...playwrightPlugin.configs['flat/recommended'].rules,
       'playwright/expect-expect': 'off',
     },

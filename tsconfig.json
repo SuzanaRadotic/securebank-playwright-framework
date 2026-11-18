@@ -6,7 +6,8 @@
     "types": ["node", "@playwright/test"],
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
   },
   "include": ["**/*.ts", "playwright.config.ts"]
 }
