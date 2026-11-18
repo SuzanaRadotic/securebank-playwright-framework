@@ -6,7 +6,6 @@ import { commonErrors } from '../data/error-messages';
 import path from 'path';
 import fs from 'fs';
 
-
 const authDir = 'playwright/.auth';
 
 function ensureAuthDir() {
@@ -18,7 +17,7 @@ function ensureAuthDir() {
 setup('authenticate as standard user', async ({ page }) => {
   ensureAuthDir();
   const loginPage = new LoginPage(page);
-  const dashboardPage = new DashboardPage(page)
+  const dashboardPage = new DashboardPage(page);
 
   await loginPage.navigateTo();
   await loginPage.enterUserNameAndPassword(roles.standard.username, roles.standard.password);
@@ -31,11 +30,11 @@ setup('authenticate as standard user', async ({ page }) => {
 setup('authenticate as frozen user', async ({ page }) => {
   ensureAuthDir();
   const loginPage = new LoginPage(page);
-  const dashboardPage = new DashboardPage(page)
+  const dashboardPage = new DashboardPage(page);
 
   await loginPage.navigateTo();
   await loginPage.enterUserNameAndPassword(roles.frozen.username, roles.frozen.password);
-  
+
   await dashboardPage.frozenAccountBanner.verifyIsDisplayed(commonErrors.frozenAccount);
 
   await page.context().storageState({ path: path.join(authDir, 'frozen.json') });

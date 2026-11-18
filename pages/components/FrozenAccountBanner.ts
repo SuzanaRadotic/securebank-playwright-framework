@@ -7,8 +7,8 @@ export class FrozenAccountBanner {
     this.banner = page.getByTestId('frozen-account-banner');
   }
 
-async verifyIsDisplayed(expectedText: string): Promise<void> {
-  await expect(this.banner).toBeVisible();
-  await expect(this.banner).toContainText(expectedText);
-}
+  async verifyIsDisplayed(expectedText: string): Promise<void> {
+    await expect(this.banner).toBeVisible();
+    await expect(this.banner).toContainText(expectedText);
+  }
 }

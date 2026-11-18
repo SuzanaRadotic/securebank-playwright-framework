@@ -7,25 +7,29 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
+
   reporter: [
     ['list', { printSteps: true }],
     ['html', { open: 'never' }],
-    ['allure-playwright', {
-      detail: true,
-      outputFolder: "allure-results",
-      suiteTitle: true,
-environmentInfo: {
-        // Custom metadata parameters
-        'environment': 'QA',
-        'app_URL': 'https://qaplayground.com/bank',
-        
-        // System metadata
-        os_platform: os.platform(),
-        os_release: os.release(),
-        os_version: os.version(),
-        node_version: process.version,
+    [
+      'allure-playwright',
+      {
+        detail: true,
+        outputFolder: 'allure-results',
+        suiteTitle: true,
+        environmentInfo: {
+          // Custom metadata parameters
+          environment: 'QA',
+          app_URL: 'https://qaplayground.com/bank',
+
+          // System metadata
+          os_platform: os.platform(),
+          os_release: os.release(),
+          os_version: os.version(),
+          node_version: process.version,
+        },
       },
-    }],
+    ],
     ['line'],
   ],
   use: {
@@ -37,9 +41,9 @@ environmentInfo: {
 
   projects: [
     // 1. Setup project runs first and builds state files for all roles
-    { 
-      name: 'setup', 
-      testMatch: /.*\.setup\.ts/ 
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
     },
 
     // 2. Main test suite runner
@@ -47,7 +51,7 @@ environmentInfo: {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        // 💡 No default storageState here! 
+        // 💡 No default storageState here!
         // Leaves default tests unauthenticated (perfect for login.spec.ts).
       },
       dependencies: ['setup'],

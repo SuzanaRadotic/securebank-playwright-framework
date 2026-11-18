@@ -33,7 +33,7 @@ A scalable UI automation framework for the [QA Playground Bank](https://qaplaygr
 
 ## ⚙️ Prerequisites
 
-- **Node.js:** 20.x or higher
+- **Node.js:** 22.x or higher
 - **npm:** 9.x or higher
 
 ---
@@ -43,7 +43,7 @@ A scalable UI automation framework for the [QA Playground Bank](https://qaplaygr
 1. Install dependencies:
    `npm ci`
 2. Install Playwright browser binaries:
-   `npx playwright install`
+   `npx playwright install chromium`
 
 ---
 
@@ -124,10 +124,12 @@ SecureBank/
 
 ## 📊 Available Scripts
 
-- `npm test` — Full test suite
-- `npm run test:smoke` — Smoke tests only
-- `npm run lint` — ESLint code quality check
-- `npm run format` - Format with Prettier
-- `npm run allure:serve` — Generate and open Allure report
-- `npm run allure:generate` — Generate a standalone HTML report
-- `npm run allure:open` — Open the generated HTML report
+- `npm test` — Run the full test suite
+- `npm run test:smoke` — Run smoke tests only
+- `npm run lint` — Run ESLint code quality checks
+- `npm run typecheck` — Run TypeScript type checking
+- `npm run check` — Run linting, type checking, and the full test suite
+- `npm run format` — Format code with Prettier
+- `npm run allure:serve` — Generate and open the Allure report
+- `npm run allure:generate` — Generate a standalone Allure report
+- `npm run allure:open` — Open the generated Allure report

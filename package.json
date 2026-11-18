@@ -1,8 +1,7 @@
 {
   "name": "securebank",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "End-to-end test automation framework for a banking web application using Playwright and TypeScript",
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('allure-results', { recursive: true, force: true })\"",
     "test": "npm run clean && playwright test",
@@ -16,7 +15,16 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run lint && npm run typecheck && npm test"
   },
-  "keywords": [],
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "test-automation",
+    "e2e-testing",
+    "automation-framework"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",

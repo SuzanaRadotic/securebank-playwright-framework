@@ -9,7 +9,6 @@ export class DashboardPage {
   readonly recentTransactionsWidget: Locator;
   readonly recentTransactionRows: Locator;
   readonly recentTransactionDates: Locator;
- 
 
   constructor(page: Page) {
     this.page = page;
@@ -78,17 +77,17 @@ export class DashboardPage {
   /**
    * Asserts transactions are sorted by date descending
    */
-async verifyRecentTransactionsSortedByDateDescending(): Promise<void> {
-  const dateTexts = await this.recentTransactionDates.allInnerTexts();
-  expect(dateTexts.length).toBeGreaterThan(0);
+  async verifyRecentTransactionsSortedByDateDescending(): Promise<void> {
+    const dateTexts = await this.recentTransactionDates.allInnerTexts();
+    expect(dateTexts.length).toBeGreaterThan(0);
 
-  const timestamps = dateTexts.map((dateStr) => new Date(dateStr).getTime());
-  expect(timestamps.every(Number.isFinite)).toBe(true);
+    const timestamps = dateTexts.map((dateStr) => new Date(dateStr).getTime());
+    expect(timestamps.every(Number.isFinite)).toBe(true);
 
-  for (let i = 0; i < timestamps.length - 1; i++) {
-    expect(timestamps[i]).toBeGreaterThanOrEqual(timestamps[i + 1]);
+    for (let i = 0; i < timestamps.length - 1; i++) {
+      expect(timestamps[i]).toBeGreaterThanOrEqual(timestamps[i + 1]);
+    }
   }
-}
 
   /**
    * Verifies account frozen banner text
